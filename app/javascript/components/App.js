@@ -1,16 +1,22 @@
 import React from 'react'
-import {Link, Router, Switch} from 'react-router-dom'
+import './App.css'
+import {Link, Route, Switch} from 'react-router-dom'
+import Home from './Home'
+import JoinPage from './JoinPage'
+import CategoryPage from './CategoryPage'
+import LoginPage from './LoginPage'
 
 class App extends React.Component {
   render () {
     return (
       <div>
         <Switch>
-          <Router exact path="/users/new" render={() => <JoinPage />} />
+          <Route exact path="/" render={() => <Home />} /> 
+          <Route exact path="/login" render={() => <LoginPage />} /> 
+          <Route exact path="/users/new" render={() => <JoinPage />} />
+          <Route exact path="/categories" render={() => <CategoryPage />} />
         </Switch>
-        <h1>TRACKIT</h1>
-        <Link to="/users/new">Join</Link>
-        <Link to="">Login</Link>
+       
       </div>
     ) 
   } 

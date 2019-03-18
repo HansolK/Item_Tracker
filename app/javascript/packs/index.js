@@ -5,7 +5,9 @@ import {BrowserRouter} from 'react-router-dom';
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
-    <App/>,
+    <BrowserRouter>
+      <App/>
+    </BrowserRouter>,
     document.body.appendChild(document.createElement('div')),
   )
 })

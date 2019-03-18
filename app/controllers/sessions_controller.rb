@@ -1,11 +1,19 @@
 class SessionsController < ApplicationController
-  def new
+  def show
+    puts "this is the sessions #{session[:user_id]}"
+    if session[:user_id]
+      render :json => {user: User.find(session[:user_id]) }
+    else
+      render :json => {error: "not logged in"}
+    end
   end
 
   def create
     user = User.find_by_email(params[:email])
     if user && user.authenticate(params[:password])
-      session[:user_id] == user.id
+      session[:user_id] = user.id
+      puts "logged in! #{session[:user_id]}"
+      puts session
       redirect_to "/categories", notice: "Logged in!"
     else
       flash.now[:alert] = "Email or password is invalid"
