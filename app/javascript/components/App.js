@@ -17,9 +17,7 @@ class App extends React.Component {
           <Route exact path="/" render={() => <Home />} /> 
           <Route exact path="/login" render={() => <LoginPage />} /> 
           <Route exact path="/users/new" render={() => <JoinPage />} />
-          <Route exact path="/categories" render={() => <CategoryPage />} />
-          <Route exact path="/categories/new" render={() => <CategoryForm />} />
-          <Route path="/categories/:id" component={ItemPage} /> 
+          <Route path="/categories/:id?" component={CategoryPage} /> 
         </Switch>
        
       </div>

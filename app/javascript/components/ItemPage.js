@@ -6,13 +6,15 @@ import AddIcon from '@material-ui/icons/Add'
 function ItemPage(props) {
   const [items, setItems] = useState([])
   const [addItem, setAddItem] = useState(false)
+  
   useEffect(function() {
     fetch(`/api/categories/${props.selectedCategory}`)
     .then(res => res.json())
     .then(data => {
       setItems(data.items)
     })
-  }, [])
+  }, [props.selectedCategory])
+  
   return(
     <div>
       <Fab 
