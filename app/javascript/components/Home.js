@@ -7,7 +7,6 @@ function Home() {
   if (userProvider.isLoggedIn) {
     return (
       <div>
-        <h1>TRACKIT</h1>
         <p>You are logged in</p>
         <Link to="/categories">Categories</Link>
       </div>
@@ -15,7 +14,6 @@ function Home() {
   }
   return (
     <div>
-      <h1>TRACKIT</h1>
       <Link to="/users/new">Join</Link>
       <Link to="/login">Login</Link>
     </div>

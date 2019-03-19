@@ -25,9 +25,8 @@ function ItemPage(props) {
       aria-label="Add">
           <AddIcon />
       </Fab>
-      {items.map(item => {
-        console.log("mapping", item)
-        return <div>
+      {items.map((item, index) => {
+        return <div key={index}>
           <p>{item.name}</p>
           <p>{item.rate}</p>
         </div>

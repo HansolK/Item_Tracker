@@ -9,7 +9,7 @@ class CategoriesController < ApplicationController
     c.name = params[:name]
     c.save
 
-    redirect_to "/categories"
+    render :json => {user: c}
   end
 
   def show

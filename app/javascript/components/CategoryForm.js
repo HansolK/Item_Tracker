@@ -1,26 +1,43 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
+import {UserContext} from './Providers/UserProvider'
 import './JoinPage.css'
 
-function CategoryForm() {
-  var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-  const [session, setSession] = useState({loading: true})
-  useEffect(function() {
-      fetch("/sessions")
-      .then(res => res.json())
-      .then(data => {
-        setSession({...session, loading: false, user_id: data.user.id})
-      })
-  },[])
+function CategoryForm(props) {
+  const userProvider = useContext(UserContext)
+  const [categoryName, setCategoryName] = useState("")
 
-  if(session.loading === false && session.user_id !== null) {
+  console.log('category form is rendered')
+
+  function newCategory(name) {
+    fetch("/categories", {
+      method: "post",
+      body: JSON.stringify({name}),
+      headers: {
+        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+        'Content-type': 'application/json'
+      }
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log("data", data)
+      props.setCategories({...props.categories, name:data.name, id: data.id})
+    })
+  }
+
+  if(userProvider.isLoggedIn) {
     return(
       <div>
-        <form action="/categories" method="post">
-          <input type="hidden" name="user_id" value={session.user_id}/>
-          <input type="hidden" name="authenticity_token" value={`${token}`} />
+        <form onSubmit={e => {
+          e.preventDefault()
+          newCategory(categoryName)
+        }}>
           <div className="form">
             <label>Name:</label>
-            <input name="name"/>
+            <input onChange={e => {
+              setCategoryName(e.target.value)
+            }} 
+            value={categoryName}
+            name="name"/>
             <button className="submit_form_button">Create</button>
           </div>
         </form>
@@ -28,9 +45,8 @@ function CategoryForm() {
     ) 
   }
   return (
-    <p>Oops, something is wrong</p>
+    <p>Oops, You have to log in first</p>
   )
-  
 }
 
 export default CategoryForm
