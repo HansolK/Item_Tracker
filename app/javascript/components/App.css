@@ -1,3 +1,13 @@
 h1 {
   text-align: center;
 }
+
+.spacing {
+  padding: 10px;
+  padding-left: 0;
+  height: 100vh;
+}
+
+.topnav {
+  z-index: 1600 !important;
+}

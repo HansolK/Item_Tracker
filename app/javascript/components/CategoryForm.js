@@ -6,8 +6,6 @@ function CategoryForm(props) {
   const userProvider = useContext(UserContext)
   const [categoryName, setCategoryName] = useState("")
 
-  console.log('category form is rendered')
-
   function newCategory(name) {
     fetch("/categories", {
       method: "post",
@@ -19,7 +17,6 @@ function CategoryForm(props) {
     })
     .then(res => res.json())
     .then(data => {
-      console.log("data", data)
       props.setCategories({...props.categories, name:data.name, id: data.id})
     })
   }
