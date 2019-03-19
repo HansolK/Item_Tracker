@@ -13,10 +13,9 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       puts "logged in! #{session[:user_id]}"
       puts session
-      redirect_to "/categories", notice: "Logged in!"
+      render :json => {user: user}
     else
-      flash.now[:alert] = "Email or password is invalid"
-      redirect_to "/login"
+      render :json => {error: "Email or password is invalid"}
     end
   end
 

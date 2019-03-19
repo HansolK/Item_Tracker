@@ -15,9 +15,29 @@ function UserProvider(props) {
       })
   },[])
 
+  const login = (email, password) => {
+    fetch("/sessions/create", {
+      method: "post",
+      body: JSON.stringify({email, password}),
+      headers: {
+        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+        'Content-type': 'application/json'
+      }
+    })
+    .then(res => res.json())
+    .then(data => {
+      if(data.error) {
+      setSession({...session, user: null})
+    } else {
+      setSession({...session, user: data.user})
+    }
+    })
+  }
+
   return(
     <UserContext.Provider
       value={{
+        login,
         isLoggedIn: session.loading === false && session.user !== null,
         user: session.user,
         initalLoading: session.loading

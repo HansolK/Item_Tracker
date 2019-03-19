@@ -1,18 +1,38 @@
-import React from 'react'
+import React, {useContext, useState} from 'react'
+import {Redirect} from 'react-router-dom'
 import './JoinPage.css'
 import Button from '@material-ui/core/Button'
+import {UserContext} from './Providers/UserProvider'
 
 function LoginPage() {
-  var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+  const userProvider = useContext(UserContext)
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  if(userProvider.isLoggedIn) {
+    return <Redirect to="/categories"/>
+  }
   return(
     <div className="login_page">
       <h1>Login and Love it</h1>
-        <form action="/sessions/create" method="get">
+        <form onSubmit={e => {
+          e.preventDefault()
+          userProvider.login(email, password)
+          }}>
           <div className="form">
             <label>Email:</label>
-            <input name="email" type="text"/>
+            <input 
+            onChange={e => {
+              setEmail(e.target.value)
+            }}
+            value={email}
+            type="text"/>
             <label>Password:</label>
-            <input name="password" type="password"/>
+            <input 
+            onChange={e => {
+              setPassword(e.target.value)
+            }}
+            value={password}
+            type="password"/>
           </div>
           <div className="submit_form_button">
             <Button variant="outlined" size="medium" color="primary" type="submit">

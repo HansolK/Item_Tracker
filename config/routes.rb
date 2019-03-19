@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   
   get '/sessions', to: "sessions#show"
-  get '/sessions/create'
+  post '/sessions/create', to:"sessions#create" 
   get '/sessions/destroy'
   
   post 'api/users/create', to: "users#create"
