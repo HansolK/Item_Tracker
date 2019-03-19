@@ -15,7 +15,10 @@ function UserProvider(props) {
       })
   },[])
 
+  const [loginStatus, setLoginStatus] = useState({error: null, loading: false})
   const login = (email, password) => {
+    setLoginStatus({loading: true})
+
     fetch("/sessions/create", {
       method: "post",
       body: JSON.stringify({email, password}),
@@ -26,7 +29,9 @@ function UserProvider(props) {
     })
     .then(res => res.json())
     .then(data => {
+      setLoginStatus({...loginStatus, loading: false})
       if(data.error) {
+      setLoginStatus({...loginStatus, error: data.error})
       setSession({...session, user: null})
     } else {
       setSession({...session, user: data.user})
@@ -38,6 +43,7 @@ function UserProvider(props) {
     <UserContext.Provider
       value={{
         login,
+        loginStatus,
         isLoggedIn: session.loading === false && session.user !== null,
         user: session.user,
         initalLoading: session.loading
