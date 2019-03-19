@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
+  post '/items', to: "items#create"
+  get '/items/:id', to: "items#show"
+
   post '/categories', to: "categories#create"
-  get '/api/categories', to: "catgories#show"
-  
+  get '/api/categories', to: "categories#index"
+  get '/api/categories/:id', to: "categories#show"
+
   
   get '/sessions', to: "sessions#show"
   get '/sessions/create'

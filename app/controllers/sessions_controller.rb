@@ -1,8 +1,7 @@
 class SessionsController < ApplicationController
   def show
-    puts "this is the sessions #{session[:user_id]}"
     if session[:user_id]
-      render :json => {user: User.find(session[:user_id]) }
+      render :json => {user: User.find(session[:user_id])}
     else
       render :json => {error: "not logged in"}
     end

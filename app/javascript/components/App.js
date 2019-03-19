@@ -5,16 +5,21 @@ import Home from './Home'
 import JoinPage from './JoinPage'
 import CategoryPage from './CategoryPage'
 import LoginPage from './LoginPage'
+import CategoryForm from './CategoryForm'
+import ItemPage from './ItemPage'
 
 class App extends React.Component {
   render () {
     return (
+     
       <div>
         <Switch>
           <Route exact path="/" render={() => <Home />} /> 
           <Route exact path="/login" render={() => <LoginPage />} /> 
           <Route exact path="/users/new" render={() => <JoinPage />} />
           <Route exact path="/categories" render={() => <CategoryPage />} />
+          <Route exact path="/categories/new" render={() => <CategoryForm />} />
+          <Route path="/categories/:id" component={ItemPage} /> 
         </Switch>
        
       </div>

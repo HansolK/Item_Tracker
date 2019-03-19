@@ -4,7 +4,6 @@ import Button from '@material-ui/core/Button'
 
 function JoinPage() {
   var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-  console.log("token",token)
   return(
     <div className="join_page">
       <h1>Create Your Account</h1>
