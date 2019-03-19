@@ -1,30 +1,30 @@
-import React, { useContext, useState } from "react";
-import { Redirect } from "react-router-dom";
-import "./JoinPage.css";
-import Button from "@material-ui/core/Button";
-import { UserContext } from "./Providers/UserProvider";
+import React, { useContext, useState } from "react"
+import { Redirect } from "react-router-dom"
+import "./JoinPage.css"
+import Button from "@material-ui/core/Button"
+import { UserContext } from "./Providers/UserProvider"
 
 function LoginPage() {
-  const userProvider = useContext(UserContext);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const userProvider = useContext(UserContext)
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
   if (userProvider.isLoggedIn) {
-    return <Redirect to="/categories" />;
+    return <Redirect to="/categories" />
   }
   return (
     <div className="login_page">
       <h1>Login and Love it</h1>
       <form
         onSubmit={e => {
-          e.preventDefault();
-          userProvider.login(email, password);
+          e.preventDefault()
+          userProvider.login(email, password)
         }}
       >
         <div className="form">
           <label>Email:</label>
           <input
             onChange={e => {
-              setEmail(e.target.value);
+              setEmail(e.target.value)
             }}
             value={email}
             type="text"
@@ -32,7 +32,7 @@ function LoginPage() {
           <label>Password:</label>
           <input
             onChange={e => {
-              setPassword(e.target.value);
+              setPassword(e.target.value)
             }}
             value={password}
             type="password"
@@ -53,7 +53,7 @@ function LoginPage() {
         )}
       </form>
     </div>
-  );
+  )
 }
 
-export default LoginPage;
+export default LoginPage

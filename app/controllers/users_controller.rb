@@ -5,7 +5,7 @@ class UsersController < ApplicationController
     user.email = params[:email]
     user.password = params[:password]
     user.save
-
-    redirect_to "/categories"
+    session[:user_id] = user.id
+    render :json => {user: user}
   end
 end
