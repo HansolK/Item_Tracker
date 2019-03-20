@@ -4,6 +4,7 @@ import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import Divider from '@material-ui/core/Divider';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
@@ -32,6 +33,12 @@ function CategoryMenu(props) {
             <ListItemText primary={category.name} />
           </ListItem>
         ))}
+      </List>
+      <Divider />
+      <List>
+        <ListItem key={"add category"}button>
+          <ListItemText onClick={e => props.clickState(true)} primary="+ Add category" />
+        </ListItem>
       </List>
   
     </Drawer>

@@ -1,9 +1,0 @@
-<h1>Item detail</h1>
-
-<p>Name: <%=@item.name%></p>
-<p>Category: <%=Category.find(@item.category_id).name%></p>
-<p>Price: <%=@item.price%></p>
-<p>Description: <%=@item.description%></p>
-<p>Rate: <%=@item.rate%></p>
-
-<a href="/categories/<%=@item.id%>">back</a>

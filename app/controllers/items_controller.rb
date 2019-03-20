@@ -8,10 +8,21 @@ class ItemsController < ApplicationController
     i.rate = params[:rate]
     i.save
 
-    redirect_to "/items/#{i.id}"
+    render :json => {item: i}
   end
 
   def show
     @item = Item.find(params[:id])
+    render :json => {item: @item}
+  end
+
+  def edit
+    @item = Item.find(params[:id])
+    @Item.name = params[:name]
+    @Item.category_id = params[:category_id]
+    @Item.price = params[:price]
+    @Item.description = params[:description]
+    @Item.rate = params[:rate]
+    @Item.save
   end
 end

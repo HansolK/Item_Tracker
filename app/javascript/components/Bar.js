@@ -7,13 +7,16 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
 
-function Bar() {
+function Bar(props) {
   const { isLoggedIn, login, signOut } = useUserProvider()
+  
   return( 
     <AppBar position="fixed" className="topnav">
       <Toolbar>
-        <Typography variant="h6" color="inherit">
-            Trackit
+        <Typography
+         variant="h6" 
+         color="inherit">
+            <Link to="/">Track what you have experienced</Link>
         </Typography>
         {isLoggedIn && <Button 
         onClick={() => {

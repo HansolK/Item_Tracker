@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import "./App.css";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { useUserProvider } from "./Providers/UserProvider";
@@ -10,14 +10,15 @@ import LoginPage from "./LoginPage";
 
 function App() {
   const userProvider = useUserProvider();
+  const [mainButton, setMainButton] = useState(false)
   if (userProvider.initialLoading) {
     return <div>loading.....</div>;
   }
-
+ 
   if (userProvider.isLoggedIn) {
     return (
       <>
-        <Bar />
+        <Bar buttonClick={setMainButton}/>
         <div style={{height: 64}} />
         <Switch>
           <Route exact path="/" render={() => <Home />} />
@@ -29,7 +30,7 @@ function App() {
   }
   return (
     <>
-      <Bar />
+      <Bar buttonClick={setMainButton}/>
       <Switch>
         <Route exact path="/" render={() => <Home />} />
         <Route exact path="/login" render={() => <LoginPage />} />

@@ -4,7 +4,6 @@ import "./CategoryPage.css";
 import CategoryForm from "./CategoryForm";
 import CategoryMenu from "./CategoryMenu";
 import ItemPage from "./ItemPage";
-import Grid from "@material-ui/core/Grid";
 import ListItem from "@material-ui/core/ListItem";
 
 function ListItemLink(props) {
@@ -23,14 +22,13 @@ function CategoryPage(props) {
         setCategories(something);
       });
   }, []);
+
   const [click, setClick] = useState(false);
-
-  console.log("click value", click);
-
+  
   return (
     <div style={{ display: "flex" }}>
-      <CategoryMenu categories={categories} />
-      <div style={{ padding: "5px 30px" }}>
+      <CategoryMenu categories={categories} clickState={setClick}/>
+      <div className="item_content">
         {props.match.params.id && (
           <ItemPage selectedCategory={props.match.params.id} />
         )}

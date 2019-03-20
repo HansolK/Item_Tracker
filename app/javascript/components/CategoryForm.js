@@ -1,32 +1,19 @@
 import React, {useState, useEffect, useContext} from 'react'
 import {UserContext} from './Providers/UserProvider'
+import {CategoryContext} from './Providers/CategoryProvider'
 import './JoinPage.css'
 
 function CategoryForm(props) {
   const userProvider = useContext(UserContext)
   const [categoryName, setCategoryName] = useState("")
-
-  function newCategory(name) {
-    fetch("/categories", {
-      method: "post",
-      body: JSON.stringify({name}),
-      headers: {
-        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-        'Content-type': 'application/json'
-      }
-    })
-    .then(res => res.json())
-    .then(data => {
-      props.setCategories({...props.categories, name:data.name, id: data.id})
-    })
-  }
+  const categoryProvider = useContext
 
   if(userProvider.isLoggedIn) {
     return(
       <div>
         <form onSubmit={e => {
           e.preventDefault()
-          newCategory(categoryName)
+          categoryProvider.createCategory(CategoryName)
         }}>
           <div className="form">
             <label>Name:</label>

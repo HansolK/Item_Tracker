@@ -5,11 +5,11 @@ class CategoriesController < ApplicationController
 
   def create
     c = Category.new
-    c.user_id = params[:user_id]
+    c.user_id = session[:user_id]
     c.name = params[:name]
     c.save
 
-    render :json => {user: c}
+    render :json => c
   end
 
   def show
