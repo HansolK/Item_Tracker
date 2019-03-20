@@ -3,6 +3,24 @@ const CategoryContext = createContext({});
 
 function CategoryProvider(props) {
   const [items, setItems] = useState([]);
+
+  const createCategory = name => {
+    fetch(`/categories`, {
+      method: "post",
+      body: JSON.stringify({ name }),
+      headers: {
+        "X-CSRF-Token": document
+          .querySelector('meta[name="csrf-token"]')
+          .getAttribute("content"),
+        "Content-type": "application/json"
+      }
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log("data", data)
+    })
+  }
+
   const itemPost = (name, price, description, rate, category_id) => {
     fetch(`/items`, {
       method: "post",
@@ -43,6 +61,7 @@ function CategoryProvider(props) {
       value={{
         items,
         setItems,
+        createCategory,
         itemPost,
         editItem
       }}

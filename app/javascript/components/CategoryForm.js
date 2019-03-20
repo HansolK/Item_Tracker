@@ -7,10 +7,8 @@ function CategoryForm(props) {
   const userProvider = useContext(UserContext)
   const [categoryName, setCategoryName] = useState("")
   const categoryProvider = useContext(CategoryContext)
-  console.log(categoryProvider)
 
-
-
+  
   if(userProvider.isLoggedIn) {
     return(
       <div>
