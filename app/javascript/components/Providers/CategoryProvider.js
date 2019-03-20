@@ -3,6 +3,18 @@ const CategoryContext = createContext({});
 
 function CategoryProvider(props) {
   const [items, setItems] = useState([]);
+  const [categories, setCategories] = useState([]);
+
+  const getCategories = () => {
+    fetch("/api/categories")
+      .then(res => res.json())
+      .then(data => {
+        var something = data.categories.map(cat => {
+          return { name: cat.name, id: cat.id };
+        });
+        setCategories(something);
+      });
+  }
 
   const createCategory = name => {
     fetch(`/categories`, {
@@ -61,6 +73,9 @@ function CategoryProvider(props) {
       value={{
         items,
         setItems,
+        getCategories,
+        categories,
+        setCategories,
         createCategory,
         itemPost,
         editItem

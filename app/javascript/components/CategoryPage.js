@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
+import {CategoryContext} from './Providers/CategoryProvider'
 import "./CategoryPage.css";
 import CategoryForm from "./CategoryForm";
 import CategoryMenu from "./CategoryMenu";
@@ -11,23 +11,13 @@ function ListItemLink(props) {
 }
 
 function CategoryPage(props) {
-  const [categories, setCategories] = useState([]);
-
-  useEffect(function() {
-    fetch("/api/categories")
-      .then(res => res.json())
-      .then(data => {
-        var something = data.categories.map(cat => {
-          return { name: cat.name, id: cat.id };
-        });
-        setCategories(something);
-      });
-  }, []);
-
+  const categoryProvider = useContext(CategoryContext)
+  useEffect(categoryProvider.getCategories, [])
+  
   const [click, setClick] = useState(false);
   return (
     <div style={{ display: "flex" }}>
-      <CategoryMenu categories={categories} AddCategoryClick={setClick}/>
+      <CategoryMenu categories={categoryProvider.categories} AddCategoryClick={setClick}/>
       <div className="item_content">
         
         {props.match.params.id && (
@@ -35,7 +25,7 @@ function CategoryPage(props) {
         )}
 
         {click ? (
-          <CategoryForm categories={categories} setCategories={setCategories} />
+          <CategoryForm categories={categoryProvider.categories} setCategories={categoryProvider.setCategories} />
         ) : (
           ""
         )}
