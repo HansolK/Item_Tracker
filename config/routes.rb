@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   post '/items', to: "items#create"
-  get '/items/:id', to: "items#show"
   post '/api/items/:id', to: "items#edit"
 
   post '/categories', to: "categories#create"
