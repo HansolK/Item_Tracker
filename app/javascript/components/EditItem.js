@@ -1,15 +1,23 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {CategoryContext} from './Providers/CategoryProvider'
 import Button from "@material-ui/core/Button";
 
-function EditItem(props) {
+function EditItem({currentInfo}) {
   const categoryProvider = useContext(CategoryContext);
-  const [name, setName] = useState(props.currentInfo.name);
-  const [price, setPrice] = useState(props.currentInfo.price);
-  const [description, setDescription] = useState(props.currentInfo.description);
-  const [rate, setRate] = useState(props.currentInfo.rate);
-  const category_id = props.category_id
-  const id = props.id
+  const [name, setName] = useState(currentInfo.name);
+  const [price, setPrice] = useState(currentInfo.price);
+  const [description, setDescription] = useState(currentInfo.description);
+  const [rate, setRate] = useState(currentInfo.rate);
+  const id = currentInfo.id
+  const category_id = currentInfo.category_id
+
+  useEffect(function() {
+    setName(currentInfo.name)
+    setPrice(currentInfo.price)
+    setDescription(currentInfo.description)
+    setRate(currentInfo.rate)
+  }, [currentInfo])
+
   return (
     <div>
       <form
@@ -18,7 +26,7 @@ function EditItem(props) {
           categoryProvider.editItem(id, name, price, description, rate, category_id)
         }}
       >
-        <input type="hidden" name="category_id" value={props.category} />
+        <input type="hidden" name="category_id" value={category_id} />
         <div className="form">
           <label>Name:</label>
           <input

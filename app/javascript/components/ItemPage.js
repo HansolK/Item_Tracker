@@ -11,7 +11,7 @@ import "./ItemPage.css";
 function ItemPage(props) {
   const [currentInfo, setCurrentInfo] = useState("");
   const categoryProvider = useContext(CategoryContext);
-  const [editButton, setEditbutton] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
   const [addItem, setAddItem] = useState(false);
 
   useEffect(
@@ -51,7 +51,7 @@ function ItemPage(props) {
               <button
                 onClick={e => {
                   setCurrentInfo(item);
-                  setEditbutton(true);
+                  setIsEditing(true);
                 }}
               >
                 Edit
@@ -64,16 +64,14 @@ function ItemPage(props) {
           );
         })
       )}
-      {editButton && <EditItem currentInfo={currentInfo} />}
+      {isEditing && <EditItem currentInfo={currentInfo} />}
 
-      {addItem ? (
+      {addItem && (
         <NewItem
           items={categoryProvider.items}
           setItems={categoryProvider.setItems}
           category={props.selectedCategory}
         />
-      ) : (
-        ""
       )}
 
     </div>
