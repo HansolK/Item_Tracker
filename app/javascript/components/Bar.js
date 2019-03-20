@@ -8,22 +8,26 @@ import Typography from '@material-ui/core/Typography';
 
 
 function Bar(props) {
-  const { isLoggedIn, login, signOut } = useUserProvider()
+  const { isLoggedIn, signOut, user } = useUserProvider()
   
   return( 
-    <AppBar position="fixed" className="topnav">
-      <Toolbar>
+    <AppBar position="fixed" className="topnav_wrapper">
+      <Toolbar className="topnav">
         <Typography
          variant="h6" 
          color="inherit">
             <Link to="/">Track what you have experienced</Link>
         </Typography>
-        {isLoggedIn && <Button 
-        onClick={() => {
-          signOut()
-        }}
-        color="inherit">Log out</Button>}
-        {!isLoggedIn && <Button color="inherit" component={Link} to="/login">Login</Button>}
+        <div className="topnav_second">
+          <Typography>Hello, {user.name}</Typography>
+          {isLoggedIn && <Button 
+          onClick={() => {
+            signOut()
+          }}
+
+          color="inherit">Log out</Button>}
+          {!isLoggedIn && <Button color="inherit" component={Link} to="/login">Login</Button>}
+        </div>
       </Toolbar>
     </AppBar>
   )

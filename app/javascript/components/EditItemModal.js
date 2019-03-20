@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { CategoryContext } from "./Providers/CategoryProvider";
 import PropTypes from "prop-types";
 import TextField from "@material-ui/core/TextField";
@@ -29,35 +29,35 @@ const styles = theme => ({
 });
 
 
-function ItemModal(props) {
+function EditItemModal({onClose, currentInfo, editItemModal, classes}) {
   const categoryProvider = useContext(CategoryContext);
-  const [name, setName] = useState("");
-  const [price, setPrice] = useState("");
-  const [description, setDescription] = useState("");
-  const [rate, setRate] = useState(0);
-  const category_id = props.category;
-  const { classes } = props;
+  const [name, setName] = useState(currentInfo.name);
+  const [price, setPrice] = useState(currentInfo.price);
+  const [description, setDescription] = useState(currentInfo.description);
+  const [rate, setRate] = useState(currentInfo.rate);
+  const id = currentInfo.id
+  const category_id = currentInfo.category_id
+  useEffect(function() {
+    setName(currentInfo.name)
+    setPrice(currentInfo.price)
+    setDescription(currentInfo.description)
+    setRate(currentInfo.rate)
+  }, [currentInfo])
 
   return (
     <div>
       <Modal
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
-        open={props.itemModal}
-        onClose={e => props.onClose()}
+        open={editItemModal}
+        onClose={() => onClose()}
       >
         <div style={getModalStyle()} className={classes.paper}>
           <form
             onSubmit={e => {
               e.preventDefault();
-              props.onClose();
-              categoryProvider.itemPost(
-                name,
-                price,
-                description,
-                rate,
-                category_id
-              );  
+              onClose();
+              categoryProvider.editItem(id, name, price, description, rate, category_id)
             }}
           >
             <TextField
@@ -100,7 +100,7 @@ function ItemModal(props) {
               }}
             />
             <Button type="submit" className={classes.button}>
-              Create
+              Edit
             </Button>
           </form>
         </div>
@@ -109,9 +109,9 @@ function ItemModal(props) {
   );
 }
 
-ItemModal.propTypes = {
+EditItemModal.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
 // We need an intermediary variable for handling the recursive nesting.
-export default withStyles(styles)(ItemModal);
+export default withStyles(styles)(EditItemModal);

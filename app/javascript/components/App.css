@@ -8,11 +8,17 @@ h1 {
   height: 100vh;
 }
 
-.topnav {
+.topnav_wrapper {
   z-index: 1600 !important;
 }
 
 .topnav {
   display: flex;
   justify-content: space-between;
+}
+
+.topnav_second {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }

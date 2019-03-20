@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { CategoryContext } from "./Providers/CategoryProvider";
-import EditItem from "./EditItem";
-import ItemModal from './ItemModal'
 import NewItem from "./NewItem";
+import EditItemModal from "./EditItemModal";
+import ItemModal from './ItemModal'
 import AddIcon from "@material-ui/icons/Add";
 import Button from "@material-ui/core/Button";
 import "./ItemPage.css";
@@ -10,9 +10,8 @@ import "./ItemPage.css";
 function ItemPage(props) {
   const [currentInfo, setCurrentInfo] = useState("");
   const categoryProvider = useContext(CategoryContext);
-  const [isEditing, setIsEditing] = useState(false);
   const [itemModal, setItemModal] = useState(false);
-
+  const [editItemModal, setEditItemModal] = useState(false);
   useEffect(
     function() {
       fetch(`/api/categories/${props.selectedCategory}`)
@@ -50,7 +49,7 @@ function ItemPage(props) {
               <button
                 onClick={e => {
                   setCurrentInfo(item);
-                  setIsEditing(true);
+                  setEditItemModal(true);
                 }}
               >
                 Edit
@@ -63,7 +62,7 @@ function ItemPage(props) {
           );
         })
       )}
-      {isEditing && <EditItem currentInfo={currentInfo} />}
+      {editItemModal && <EditItemModal editItemModal={editItemModal} currentInfo={currentInfo} onClose={() => setEditItemModal(false)}/>}
 
       {itemModal && (
         <ItemModal
