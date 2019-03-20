@@ -18,11 +18,13 @@ class ItemsController < ApplicationController
 
   def edit
     @item = Item.find(params[:id])
-    @Item.name = params[:name]
-    @Item.category_id = params[:category_id]
-    @Item.price = params[:price]
-    @Item.description = params[:description]
-    @Item.rate = params[:rate]
-    @Item.save
+    @item.name = params[:name]
+    @item.category_id = params[:category_id]
+    @item.price = params[:price]
+    @item.description = params[:description]
+    @item.rate = params[:rate]
+    @item.save
+
+    render :json => {item: @item}
   end
 end

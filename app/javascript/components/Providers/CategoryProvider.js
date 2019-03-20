@@ -47,8 +47,8 @@ function CategoryProvider(props) {
       });
   };
 
-  const editItem = (props) => {
-    fetch(`/api/items/${props.id}`, {
+  const editItem = (id, name, price, description, rate, category_id) => {
+    fetch(`/api/items/${id}`, {
       method: "post",
       body: JSON.stringify({ name, price, description, rate, category_id }),
       headers: {
@@ -60,8 +60,12 @@ function CategoryProvider(props) {
     })
     .then(res => res.json())
     .then(data => {
-      console.log(data)
-      data
+      setItems(items.map(item => {
+        if(item.id === data.item.id) {
+          return data.item
+        }
+        return item
+      }))
     })
   }
 
