@@ -9,6 +9,7 @@ function NewItem(props) {
   const [description, setDescription] = useState("")
   const [rate, setRate] = useState(0)
   const category_id = props.category
+  
   return(
     <div>
       <form onSubmit={e => {

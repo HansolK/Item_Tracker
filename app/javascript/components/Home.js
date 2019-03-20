@@ -1,6 +1,7 @@
 import React, { useContext } from "react"
 import { Link } from "react-router-dom"
 import { UserContext } from "./Providers/UserProvider"
+import AddCategoryModal from "./AddCategoryModal";
 
 function Home() {
   const userProvider = useContext(UserContext)

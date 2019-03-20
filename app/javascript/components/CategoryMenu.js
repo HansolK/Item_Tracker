@@ -1,5 +1,6 @@
-import React from "react"
+import React, {useState} from "react"
 import {Link} from 'react-router-dom'
+import AddCategoryModal from './AddCategoryModal'
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -18,6 +19,7 @@ const styles = theme => ({
 });
 
 function CategoryMenu(props) {
+  const [modalOpen, setModalOpen] = useState(false);
   return (
     <Drawer
       className={props.classes.drawer}
@@ -29,7 +31,11 @@ function CategoryMenu(props) {
       <div className={props.classes.toolbar}/>
       <List>
         {props.categories.map((category, index) => (
-          <ListItem component={Link} to={`/categories/${category.id}`} button key={category.id}>
+          <ListItem 
+          onClick={e => console.log(category)}
+          component={Link} to={`/categories/${category.id}`} 
+          button 
+          key={category.id}>
             <ListItemText primary={category.name} />
           </ListItem>
         ))}
@@ -37,10 +43,16 @@ function CategoryMenu(props) {
       <Divider />
       <List>
         <ListItem key={"add category"}button>
-          <ListItemText onClick={e => props.AddCategoryClick(true)} primary="+ Add category" />
+          <ListItemText 
+          onClick={e => setModalOpen(true)} 
+          primary="+ Add category" 
+          />
         </ListItem>
       </List>
-
+      {modalOpen && <AddCategoryModal 
+      modalOpen={modalOpen} 
+      onClose={() => {setModalOpen(false)}}
+      />}
     </Drawer>
   );
 }

@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { CategoryContext } from "./Providers/CategoryProvider";
-import {Link} from 'react-router-dom'
-import RateBar from "./RateBar";
 import EditItem from "./EditItem";
+import ItemModal from './ItemModal'
 import NewItem from "./NewItem";
 import AddIcon from "@material-ui/icons/Add";
 import Button from "@material-ui/core/Button";
@@ -12,7 +11,7 @@ function ItemPage(props) {
   const [currentInfo, setCurrentInfo] = useState("");
   const categoryProvider = useContext(CategoryContext);
   const [isEditing, setIsEditing] = useState(false);
-  const [addItem, setAddItem] = useState(false);
+  const [itemModal, setItemModal] = useState(false);
 
   useEffect(
     function() {
@@ -31,7 +30,7 @@ function ItemPage(props) {
         <h1>Explore categories</h1>
         <Button
           onClick={() => {
-            setAddItem(true);
+            setItemModal(true);
           }}
           variant="contained"
           size="medium"
@@ -66,8 +65,10 @@ function ItemPage(props) {
       )}
       {isEditing && <EditItem currentInfo={currentInfo} />}
 
-      {addItem && (
-        <NewItem
+      {itemModal && (
+        <ItemModal
+          itemModal={itemModal}
+          onClose={() => setItemModal(false)}
           items={categoryProvider.items}
           setItems={categoryProvider.setItems}
           category={props.selectedCategory}

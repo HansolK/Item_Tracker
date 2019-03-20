@@ -14,21 +14,16 @@ function CategoryPage(props) {
   const categoryProvider = useContext(CategoryContext)
   useEffect(categoryProvider.getCategories, [])
   
-  const [click, setClick] = useState(false);
   return (
     <div style={{ display: "flex" }}>
-      <CategoryMenu categories={categoryProvider.categories} AddCategoryClick={setClick}/>
+      <CategoryMenu categories={categoryProvider.categories}/>
       <div className="item_content">
         
         {props.match.params.id && (
           <ItemPage selectedCategory={props.match.params.id} />
         )}
 
-        {click ? (
-          <CategoryForm categories={categoryProvider.categories} setCategories={categoryProvider.setCategories} />
-        ) : (
-          ""
-        )}
+        
       </div>
     </div>
   );

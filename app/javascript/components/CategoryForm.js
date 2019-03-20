@@ -12,10 +12,7 @@ function CategoryForm(props) {
   if(userProvider.isLoggedIn) {
     return(
       <div>
-        <form onSubmit={e => {
-          e.preventDefault()
-          categoryProvider.createCategory(categoryName)
-        }}>
+        
           <div className="form">
             <label>Name:</label>
             <input onChange={e => {
@@ -25,7 +22,7 @@ function CategoryForm(props) {
             name="name"/>
             <button className="submit_form_button">Create</button>
           </div>
-        </form>
+
       </div>
     ) 
   }
