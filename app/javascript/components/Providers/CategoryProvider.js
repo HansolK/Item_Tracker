@@ -17,8 +17,6 @@ function CategoryProvider(props) {
     })
       .then(res => res.json())
       .then(data => {
-        console.log("returning", data.item)
-        console.log("items", items)
         setItems([...items, data.item])
       });
   };

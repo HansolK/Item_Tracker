@@ -7,6 +7,7 @@ import Home from "./Home";
 import JoinPage from "./JoinPage";
 import CategoryPage from "./CategoryPage";
 import LoginPage from "./LoginPage";
+import ShowDetail from "./ShowDetail"
 
 function App() {
   const userProvider = useUserProvider();
@@ -23,6 +24,7 @@ function App() {
         <Switch>
           <Route exact path="/" render={() => <Home />} />
           <Route path="/categories/:id?" component={CategoryPage} />
+          <Route path="/items/:id" component={ShowDetail}/>
           <Redirect to="/" />
         </Switch>
       </>

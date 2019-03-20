@@ -4,12 +4,12 @@ import Button from "@material-ui/core/Button";
 
 function EditItem(props) {
   const categoryProvider = useContext(CategoryContext);
-  const [name, setName] = useState("");
-  const [price, setPrice] = useState(0);
-  const [description, setDescription] = useState("");
-  const [rate, setRate] = useState(0);
-  const category_id = props.category
-  const id = props.category
+  const [name, setName] = useState(props.currentInfo.name);
+  const [price, setPrice] = useState(props.currentInfo.price);
+  const [description, setDescription] = useState(props.currentInfo.description);
+  const [rate, setRate] = useState(props.currentInfo.rate);
+  const category_id = props.category_id
+  const id = props.id
   return (
     <div>
       <form
@@ -25,17 +25,20 @@ function EditItem(props) {
             onChange={e => setName(e.target.value)}
             name="name"
             type="text"
+            value={name}
           />
           <label>Price:</label>
           <input
             onChange={e => setPrice(e.target.value)}
             name="price"
+            value={price}
           />
           <label>Description:</label>
           <textarea
             onChange={e => setDescription(e.target.textContent)}
             name="description"
             type="text"
+            value={description}
           />
           <label>Rate:</label>
           <input

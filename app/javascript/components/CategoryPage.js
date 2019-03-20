@@ -24,7 +24,6 @@ function CategoryPage(props) {
   }, []);
 
   const [click, setClick] = useState(false);
-  
   return (
     <div style={{ display: "flex" }}>
       <CategoryMenu categories={categories} clickState={setClick}/>

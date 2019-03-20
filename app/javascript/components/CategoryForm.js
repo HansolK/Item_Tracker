@@ -6,14 +6,17 @@ import './JoinPage.css'
 function CategoryForm(props) {
   const userProvider = useContext(UserContext)
   const [categoryName, setCategoryName] = useState("")
-  const categoryProvider = useContext
+  const categoryProvider = useContext(CategoryContext)
+  console.log(categoryProvider)
+
+
 
   if(userProvider.isLoggedIn) {
     return(
       <div>
         <form onSubmit={e => {
           e.preventDefault()
-          categoryProvider.createCategory(CategoryName)
+          categoryProvider.createCategory(categoryName)
         }}>
           <div className="form">
             <label>Name:</label>

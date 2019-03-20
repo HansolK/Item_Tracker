@@ -20,15 +20,15 @@
     },
     "index": {
       "js": [
-        "/packs/js/index-b60434514ecf285ed875.js"
+        "/packs/js/index-094da66e414229ebdbd5.js"
       ],
       "js.map": [
-        "/packs/js/index-b60434514ecf285ed875.js.map"
+        "/packs/js/index-094da66e414229ebdbd5.js.map"
       ]
     }
   },
   "hello_react.js": "/packs/js/hello_react-45b7201f4214ed71e98c.js",
   "hello_react.js.map": "/packs/js/hello_react-45b7201f4214ed71e98c.js.map",
-  "index.js": "/packs/js/index-b60434514ecf285ed875.js",
-  "index.js.map": "/packs/js/index-b60434514ecf285ed875.js.map"
+  "index.js": "/packs/js/index-094da66e414229ebdbd5.js",
+  "index.js.map": "/packs/js/index-094da66e414229ebdbd5.js.map"
 }
