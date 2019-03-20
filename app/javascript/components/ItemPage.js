@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
 import { CategoryContext } from "./Providers/CategoryProvider";
-import NewItem from "./NewItem";
 import EditItemModal from "./EditItemModal";
 import ItemModal from './ItemModal'
 import AddIcon from "@material-ui/icons/Add";
@@ -53,6 +52,13 @@ function ItemPage(props) {
                 }}
               >
                 Edit
+              </button>
+              <button
+              onClick={e => {
+                categoryProvider.deleteItem(item.id)
+              }}
+              >
+              Delete
               </button>
               <p>Name: {item.name}</p>
               <p>Rate: {item.rate}</p>

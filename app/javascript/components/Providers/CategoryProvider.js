@@ -68,6 +68,11 @@ function CategoryProvider(props) {
       }))
     })
   }
+  const deleteItem = (id) => {
+    fetch(`/api/items/${id}`)
+    .then(res => res.json())
+    .then(data => setItems(data.item))
+  }
 
   return (
     <CategoryContext.Provider
@@ -79,7 +84,8 @@ function CategoryProvider(props) {
         setCategories,
         createCategory,
         itemPost,
-        editItem
+        editItem,
+        deleteItem
       }}
     >
       {props.children}

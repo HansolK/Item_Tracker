@@ -27,4 +27,14 @@ class ItemsController < ApplicationController
 
     render :json => {item: @item}
   end
+
+  def destroy
+    i = Item.find(params[:id])
+    i.destroy
+
+    @item = Item.all
+    puts "items"
+    puts @item
+    render :json => {item: @item}
+  end
 end

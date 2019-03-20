@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   post '/items', to: "items#create"
   post '/api/items/:id', to: "items#edit"
+  get 'api/items/:id', to: "items#destroy"
 
   post '/categories', to: "categories#create"
   get '/api/categories', to: "categories#index"
