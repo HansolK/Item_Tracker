@@ -9,10 +9,7 @@ function CategoryProvider(props) {
     fetch("/api/categories")
       .then(res => res.json())
       .then(data => {
-        var something = data.categories.map(cat => {
-          return { name: cat.name, id: cat.id };
-        });
-        setCategories(something);
+        setCategories(data.categories)
       });
   }
 
@@ -29,7 +26,7 @@ function CategoryProvider(props) {
     })
     .then(res => res.json())
     .then(data => {
-      console.log("data", data)
+      setCategories([...categories, data])
     })
   }
 
