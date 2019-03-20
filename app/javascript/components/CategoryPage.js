@@ -12,6 +12,7 @@ function ListItemLink(props) {
 
 function CategoryPage(props) {
   const [categories, setCategories] = useState([]);
+
   useEffect(function() {
     fetch("/api/categories")
       .then(res => res.json())
@@ -26,11 +27,13 @@ function CategoryPage(props) {
   const [click, setClick] = useState(false);
   return (
     <div style={{ display: "flex" }}>
-      <CategoryMenu categories={categories} clickState={setClick}/>
+      <CategoryMenu categories={categories} AddCategoryClick={setClick}/>
       <div className="item_content">
+        
         {props.match.params.id && (
           <ItemPage selectedCategory={props.match.params.id} />
         )}
+
         {click ? (
           <CategoryForm categories={categories} setCategories={setCategories} />
         ) : (

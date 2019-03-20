@@ -3,7 +3,6 @@ const CategoryContext = createContext({});
 
 function CategoryProvider(props) {
   const [items, setItems] = useState([]);
-  console.log("items", items)
   const itemPost = (name, price, description, rate, category_id) => {
     fetch(`/items`, {
       method: "post",

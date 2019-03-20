@@ -14,7 +14,6 @@ function ItemPage(props) {
   const [editButton, setEditbutton] = useState(false);
   const [addItem, setAddItem] = useState(false);
 
-
   useEffect(
     function() {
       fetch(`/api/categories/${props.selectedCategory}`)

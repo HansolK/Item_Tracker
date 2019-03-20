@@ -37,10 +37,10 @@ function CategoryMenu(props) {
       <Divider />
       <List>
         <ListItem key={"add category"}button>
-          <ListItemText onClick={e => props.clickState(true)} primary="+ Add category" />
+          <ListItemText onClick={e => props.AddCategoryClick(true)} primary="+ Add category" />
         </ListItem>
       </List>
-  
+
     </Drawer>
   );
 }
