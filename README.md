@@ -18,9 +18,9 @@ I have to think about all the sinarios such as when the data is loading and is d
 I am going to work on the search feature to find the items and sort by feature according to 'rating - descending' and 'cost'.
 
 # Built with
-* Webpack
+* [Webpack](https://medium.com/@zayneabraham/how-to-create-a-react-app-with-ruby-on-rails-548366a90185?fbclid=IwAR1hWTSQ6CjtEa98VQj_-jEgnrYA1ym_jto7WHjqoryAX3IRHMS9kP2VEA8)
 * Ruby rails 5.2.2.1
-* React
-* Postgresql
-* Material UI
+* [React](https://reactjs.org/docs/getting-started.html)
+* [Postgresql](http://www.postgresqltutorial.com/install-postgresql/)
+* [Material UI](https://material-ui.com/)
 
