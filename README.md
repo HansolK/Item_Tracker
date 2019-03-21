@@ -19,7 +19,8 @@ I am going to work on the search feature to find the items and sort by feature a
 
 # Built with
 * [Webpack](https://medium.com/@zayneabraham/how-to-create-a-react-app-with-ruby-on-rails-548366a90185?fbclid=IwAR1hWTSQ6CjtEa98VQj_-jEgnrYA1ym_jto7WHjqoryAX3IRHMS9kP2VEA8)
-* Ruby rails 5.2.2.1
+* [Ruby](https://www.ruby-lang.org/en/documentation/installation/)
+* [Rails 5.2.2.1](https://guides.rubyonrails.org/v5.0/getting_started.html)
 * [React](https://reactjs.org/docs/getting-started.html)
 * [Postgresql](http://www.postgresqltutorial.com/install-postgresql/)
 * [Material UI](https://material-ui.com/)
