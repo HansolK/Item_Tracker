@@ -61,7 +61,7 @@ function ItemPage(props) {
         ) : (
           categoryProvider.items.map((item, index) => {
             return (
-              <div className="item_page">
+              <div key={index} className="item_page">
                 <div className="edit_and_delete">
                   <button
                     onClick={e => {

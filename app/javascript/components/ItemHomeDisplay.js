@@ -4,10 +4,11 @@ import { CategoryContext } from "./Providers/CategoryProvider";
 function ItemHomeDisplay(props) {
   const categoryProvider = useContext(CategoryContext);
   const [items, setItems] = useState({});
+  const [loading, setLoading] = useState(true)
   let descendingOrder = items.data
-    ? items.data.sort((a, b) => (a.rate > b.rate ? 1 : -1))
+    ? items.data.sort((a, b) => (a.rate > b.rate ? -1 : 1))
     : undefined;
-
+  console.log(descendingOrder)
   useEffect(function() {
     fetch("/api/items")
       .then(res => res.json())
@@ -15,10 +16,15 @@ function ItemHomeDisplay(props) {
         if (data.items.length > 0) {
           setItems({ data: data.items });
         } else {
+          setLoading(false)
           setItems({});
         }
       });
   }, []);
+
+  // if(loading) {
+  //   return <div className="loader"></div>
+  // }
 
   if (categoryProvider.categories.length === 0) {
     return (

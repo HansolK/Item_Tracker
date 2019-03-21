@@ -1,6 +1,5 @@
-import React, { useState,useContext } from "react";
-import {UserContext} from './Providers/UserProvider'
-import {CategoryContext} from './Providers/CategoryProvider'
+import React, { useState, useContext } from "react";
+import { CategoryContext } from "./Providers/CategoryProvider";
 import PropTypes from "prop-types";
 import TextField from "@material-ui/core/TextField";
 import { withStyles } from "@material-ui/core/styles";
@@ -9,8 +8,8 @@ import Button from "@material-ui/core/Button";
 
 function getModalStyle() {
   return {
-    top: '50%',
-    left: '50%',
+    top: "50%",
+    left: "50%",
     transform: `translate(-50%, -50%)`
   };
 }
@@ -31,11 +30,11 @@ const styles = theme => ({
 });
 
 function SimpleModal(props) {
-  const [formSubmitted, setFormSubmitted] = useState(false)
+  const [formSubmitted, setFormSubmitted] = useState(false);
   const [categoryName, setCategoryName] = useState("");
   const categoryProvider = useContext(CategoryContext);
   const { classes } = props;
-  
+
   return (
     <div>
       <Modal
@@ -45,34 +44,30 @@ function SimpleModal(props) {
         onClose={e => props.onClose()}
       >
         <div style={getModalStyle()} className={classes.paper}>
-          <form onSubmit={e => {
-            e.preventDefault()
-            props.onClose()
-            categoryProvider.createCategory(categoryName)
-          }}>
-          
+          <form
+            onSubmit={e => {
+              e.preventDefault();
+              setFormSubmitted(true);
+
+              if (categoryName !== "") {
+                props.onClose();
+                categoryProvider.createCategory(categoryName);
+              }
+            }}
+          >
             <TextField
               id="standard-name"
               label="Name"
-              error = {formSubmitted && categoryName === ""}
+              error={formSubmitted && categoryName === ""}
               value={categoryName}
               className={classes.textField}
               onChange={e => {
-                setCategoryName(e.target.value)
+                setCategoryName(e.target.value);
               }}
               fullWidth={true}
               margin="normal"
             />
-            <Button
-              onClick={e => {
-                if(categoryName !== "") {
-                  return e.submit()}
-                e.preventDefault()
-                setFormSubmitted(true)
-              }}
-              type="submit"
-              className={classes.button}
-            >
+            <Button type="submit" className={classes.button}>
               Create
             </Button>
           </form>
