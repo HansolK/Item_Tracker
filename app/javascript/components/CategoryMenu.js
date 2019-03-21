@@ -67,7 +67,6 @@ function CategoryMenu(props) {
           return (
             <ListItem
               className="category_menu_wrapper"
-              onClick={e => console.log(category)}
               component={Link}
               to={`/categories/${category.id}`}
               button
@@ -76,7 +75,7 @@ function CategoryMenu(props) {
               <ListItemText primary={category.name} />
               <IconButton
                 aria-label="Delete"
-                onClick={categoryProvider.deleteCategory(category.id)}
+                onClick={e => categoryProvider.deleteCategory(category.id)}
                 className={`${props.classes.margin} delete_category`}
               >
                 <DeleteIcon fontSize="small" />

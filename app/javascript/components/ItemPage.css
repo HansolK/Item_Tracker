@@ -3,3 +3,14 @@
   justify-content: space-between;
   align-items: center;
 }
+
+.item_wrapper {
+  border: 1px dashed black;
+  margin: 5px;
+  padding: 10px;
+}
+
+.container {
+  display: grid;
+  grid-auto-columns: 1fr 1fr 1fr
+}

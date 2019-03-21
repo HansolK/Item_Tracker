@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { CategoryContext } from "./Providers/CategoryProvider";
 import EditItemModal from "./EditItemModal";
-import ItemModal from './ItemModal'
+import ItemModal from "./ItemModal";
 import AddIcon from "@material-ui/icons/Add";
 import Button from "@material-ui/core/Button";
 import "./ItemPage.css";
@@ -11,6 +11,7 @@ function ItemPage(props) {
   const categoryProvider = useContext(CategoryContext);
   const [itemModal, setItemModal] = useState(false);
   const [editItemModal, setEditItemModal] = useState(false);
+
   useEffect(
     function() {
       fetch(`/api/categories/${props.selectedCategory}`)
@@ -22,10 +23,13 @@ function ItemPage(props) {
     [props.selectedCategory]
   );
 
+  if(categoryProvider.categories.length === 0) {
+    return "loading..."
+  }
   return (
     <div>
       <div className="category_header">
-        <h1>Explore categories</h1>
+        <h1>Explore categories {categoryProvider.getCategory(props.selectedCategory).name}</h1>
         <Button
           onClick={() => {
             setItemModal(true);
@@ -38,13 +42,13 @@ function ItemPage(props) {
           Add item
         </Button>
       </div>
-
+      <div className="container">
       {categoryProvider.items.length === 0 ? (
         <p>Nothing</p>
       ) : (
         categoryProvider.items.map((item, index) => {
           return (
-            <div key={index}>
+            <div className="item_wrapper" key={index}>
               <button
                 onClick={e => {
                   setCurrentInfo(item);
@@ -54,11 +58,11 @@ function ItemPage(props) {
                 Edit
               </button>
               <button
-              onClick={e => {
-                categoryProvider.deleteItem(item.id)
-              }}
+                onClick={e => {
+                  categoryProvider.deleteItem(item.id);
+                }}
               >
-              Delete
+                Delete
               </button>
               <p>Name: {item.name}</p>
               <p>Rate: {item.rate}</p>
@@ -68,7 +72,14 @@ function ItemPage(props) {
           );
         })
       )}
-      {editItemModal && <EditItemModal editItemModal={editItemModal} currentInfo={currentInfo} onClose={() => setEditItemModal(false)}/>}
+      </div>
+      {editItemModal && (
+        <EditItemModal
+          editItemModal={editItemModal}
+          currentInfo={currentInfo}
+          onClose={() => setEditItemModal(false)}
+        />
+      )}
 
       {itemModal && (
         <ItemModal
@@ -79,7 +90,6 @@ function ItemPage(props) {
           category={props.selectedCategory}
         />
       )}
-
     </div>
   );
 }

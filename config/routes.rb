@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   post '/api/categories', to: "categories#create"
   get '/api/categories', to: "categories#index"
   get '/api/categories/:id', to: "categories#show"
-  delete '/api/categories/:id', to: "categories#destroy"
+  get '/api/categories/:id/delete', to: "categories#destroy"
 
 
   
