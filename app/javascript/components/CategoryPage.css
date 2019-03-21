@@ -6,7 +6,15 @@
   padding: 5px 30px;
   height: 100vh;
   width: 100%;
-  background-image: url("/the-journal-garden-vera-bitterer-682529-unsplash.jpg");
-  background-size: cover;
+  background-image: url("/scott-webb-199470-unsplash.jpg");
+  background-size: contain;
   overflow-y: scroll;
+}
+
+.category_menu_wrapper .delete_category {
+  visibility: hidden;
+}
+
+.category_menu_wrapper:hover .delete_category{
+  visibility: visible;
 }

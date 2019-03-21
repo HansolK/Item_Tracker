@@ -38,9 +38,7 @@ class ItemsController < ApplicationController
     i = Item.find(params[:id])
     i.destroy
 
-    @item = Item.all
-    puts "items"
-    puts @item
+    @item = Item.where(user_id: session[:id])
     render :json => {item: @item}
   end
 end

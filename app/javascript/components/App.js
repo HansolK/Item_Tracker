@@ -34,10 +34,10 @@ function App() {
     <>
       <Bar buttonClick={setMainButton}/>
       <Switch>
-        <Route exact path="/" render={() => <Home />} />
+        <Route exact path="/" render={() => <LoginPage />} />
         <Route exact path="/login" render={() => <LoginPage />} />
         <Route exact path="/users/new" render={() => <JoinPage />} />
-        <Redirect to="/login" />
+        <Redirect to="/" />
       </Switch>
     </>
   );

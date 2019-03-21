@@ -11,7 +11,6 @@ function ItemPage(props) {
   const categoryProvider = useContext(CategoryContext);
   const [itemModal, setItemModal] = useState(false);
   const [editItemModal, setEditItemModal] = useState(false);
-  
   useEffect(
     function() {
       fetch(`/api/categories/${props.selectedCategory}`)
@@ -40,7 +39,7 @@ function ItemPage(props) {
         </Button>
       </div>
 
-      {categoryProvider.items === [] ? (
+      {categoryProvider.items.length === 0 ? (
         <p>Nothing</p>
       ) : (
         categoryProvider.items.map((item, index) => {

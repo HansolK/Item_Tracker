@@ -3,6 +3,7 @@ const CategoryContext = createContext({});
 
 function CategoryProvider(props) {
   const [items, setItems] = useState([]);
+  const [categoryClick, setCategoryClick] = useState(false)
   const [categories, setCategories] = useState([]);
   const getCategories = () => {
     fetch("/api/categories")
@@ -29,6 +30,18 @@ function CategoryProvider(props) {
     })
   }
 
+  const deleteCategory = id => {
+    fetch(`/api/items/${id}`, {
+      method: "delete",
+      body: JSON.stringify({ id }),
+      headers: {
+        "X-CSRF-Token": document
+          .querySelector('meta[name="csrf-token"]')
+          .getAttribute("content"),
+        "Content-type": "application/json"
+      }
+    })
+  }
   const itemPost = (name, price, description, rate, category_id) => {
     fetch(`/items`, {
       method: "post",
@@ -67,6 +80,7 @@ function CategoryProvider(props) {
       }))
     })
   }
+
   const deleteItem = (id) => {
     fetch(`/api/items/${id}`)
     .then(res => res.json())
@@ -76,6 +90,9 @@ function CategoryProvider(props) {
   return (
     <CategoryContext.Provider
       value={{
+        setCategoryClick,
+        categoryClick,
+        deleteCategory,
         items,
         setItems,
         getCategories,
