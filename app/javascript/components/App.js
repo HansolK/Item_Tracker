@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { useUserProvider } from "./Providers/UserProvider";
@@ -7,23 +7,26 @@ import Home from "./Home";
 import JoinPage from "./JoinPage";
 import CategoryPage from "./CategoryPage";
 import LoginPage from "./LoginPage";
-import ShowDetail from "./ShowDetail"
+import ShowDetail from "./ShowDetail";
 
 function App() {
   const userProvider = useUserProvider();
-  const [mainButton, setMainButton] = useState(false)
   if (userProvider.initialLoading) {
-    return <div>loading.....</div>;
+    return (
+      <div className="loading">
+        <div className="loader" />
+      </div>
+    );
   }
- 
+
   if (userProvider.isLoggedIn) {
     return (
       <>
-        <Bar buttonClick={setMainButton}/>
-        <div style={{height: 64}} />
+        <Bar />
+        <div style={{ height: 64 }} />
         <Switch>
           <Route path="/categories/:id?" component={CategoryPage} />
-          <Route path="/items/:id" component={ShowDetail}/>
+          <Route path="/items/:id" component={ShowDetail} />
           <Redirect to="/categories" />
         </Switch>
       </>
@@ -31,7 +34,7 @@ function App() {
   }
   return (
     <>
-      <Bar buttonClick={setMainButton}/>
+      <Bar />
       <Switch>
         <Route exact path="/" render={() => <LoginPage />} />
         <Route exact path="/login" render={() => <LoginPage />} />
