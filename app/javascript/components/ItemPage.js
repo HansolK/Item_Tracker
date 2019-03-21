@@ -13,6 +13,7 @@ function ItemPage(props) {
   const [itemModal, setItemModal] = useState(false);
   const [editItemModal, setEditItemModal] = useState(false);
   const [loading, setLoading] = useState(true);
+
   useEffect(
     function() {
       fetch(`/api/categories/${props.selectedCategory}/items`)
@@ -26,7 +27,11 @@ function ItemPage(props) {
   );
 
   if (loading) {
-    return "loading..";
+    return (
+      <div className="loading">
+        <div className="loader" />
+      </div>
+    );
   }
 
   if (
@@ -57,7 +62,7 @@ function ItemPage(props) {
       </div>
       <div>
         {categoryProvider.items.length === 0 ? (
-          <p>Nothing</p>
+          <p>You haven't added any items for this category</p>
         ) : (
           categoryProvider.items.map((item, index) => {
             return (
@@ -80,7 +85,7 @@ function ItemPage(props) {
                   </button>
                 </div>
                 <div className="item_wrapper" key={index}>
-                  <p>Number: {index+1}</p>
+                  <p>Number: {index + 1}</p>
                   <p>Name: {item.name}</p>
                   <p>Rate: {item.rate}/10</p>
                   <p>Price: ${item.price}</p>
