@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
   post '/items', to: "items#create"
   post '/api/items/:id', to: "items#edit"
-  get 'api/items/:id', to: "items#destroy"
+  get '/api/items/:id', to: "items#destroy"
+  get '/api/items', to: "items#index"
 
-  post '/categories', to: "categories#create"
+  post '/api/categories', to: "categories#create"
   get '/api/categories', to: "categories#index"
   get '/api/categories/:id', to: "categories#show"
 
@@ -13,7 +14,7 @@ Rails.application.routes.draw do
   post '/sessions/create', to:"sessions#create" 
   get '/sessions/destroy'
   
-  post 'api/users/create', to: "users#create"
+  post '/api/users/create', to: "users#create"
   # resources :users
   
   get '/', to:"home#index"

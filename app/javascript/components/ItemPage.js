@@ -11,6 +11,7 @@ function ItemPage(props) {
   const categoryProvider = useContext(CategoryContext);
   const [itemModal, setItemModal] = useState(false);
   const [editItemModal, setEditItemModal] = useState(false);
+  
   useEffect(
     function() {
       fetch(`/api/categories/${props.selectedCategory}`)

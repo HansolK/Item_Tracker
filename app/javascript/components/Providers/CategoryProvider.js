@@ -4,7 +4,6 @@ const CategoryContext = createContext({});
 function CategoryProvider(props) {
   const [items, setItems] = useState([]);
   const [categories, setCategories] = useState([]);
-
   const getCategories = () => {
     fetch("/api/categories")
       .then(res => res.json())
@@ -14,7 +13,7 @@ function CategoryProvider(props) {
   }
 
   const createCategory = name => {
-    fetch(`/categories`, {
+    fetch(`/api/categories`, {
       method: "post",
       body: JSON.stringify({ name }),
       headers: {

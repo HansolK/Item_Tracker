@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
   def index
-    render :json => {categories: Category.all}
+    render :json => {categories: Category.where(user_id: session[:user_id])}
   end
 
   def create

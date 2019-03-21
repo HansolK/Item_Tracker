@@ -19,7 +19,7 @@ function Bar(props) {
             <Link to="/">Track what you have experienced</Link>
         </Typography>
         <div className="topnav_second">
-          <Typography>Hello, {user.name}</Typography>
+          <Typography>Hello, {user ? `${user.name}` : "stranger"}</Typography>
           {isLoggedIn && <Button 
           onClick={() => {
             signOut()

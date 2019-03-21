@@ -1,8 +1,14 @@
 class ItemsController < ApplicationController
+  def index
+    i = Item.where(user_id: session[:user_id])
+    render :json => {items: i}
+  end
+  
   def create
     i = Item.new
     i.name = params[:name]
     i.category_id = params[:category_id]
+    i.user_id = session[:user_id]
     i.price = params[:price]
     i.description = params[:description]
     i.rate = params[:rate]
