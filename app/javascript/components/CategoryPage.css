@@ -6,8 +6,8 @@
   padding: 5px 30px;
   height: 100vh;
   width: 100%;
-  background-image: url("/scott-webb-199470-unsplash.jpg");
-  background-size: contain;
+  /* background-image: url("/scott-webb-199470-unsplash.jpg"); */
+  /* background-size: contain; */
   overflow-y: scroll;
 }
 
@@ -17,4 +17,8 @@
 
 .category_menu_wrapper:hover .delete_category{
   visibility: visible;
+}
+
+.starting_position {
+  text-align: center;
 }

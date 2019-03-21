@@ -18,10 +18,9 @@ function CategoryPage(props) {
     <div style={{ display: "flex" }}>
       <CategoryMenu categories={categoryProvider.categories}/>
       <div className="item_content">
-        <ItemHomeDisplay mainProp={props}/>
-        {props.match.params.id && (
+        {props.match.params.id ? (
           <ItemPage selectedCategory={props.match.params.id} />
-        )}
+        ) : <ItemHomeDisplay mainProp={props}/>}
 
       </div>
     </div>

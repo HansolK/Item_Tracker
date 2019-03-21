@@ -75,7 +75,10 @@ function CategoryMenu(props) {
               <ListItemText primary={category.name} />
               <IconButton
                 aria-label="Delete"
-                onClick={e => categoryProvider.deleteCategory(category.id)}
+                onClick={e => {
+                  e.preventDefault()
+                  categoryProvider.deleteCategory(category.id)
+                }}
                 className={`${props.classes.margin} delete_category`}
               >
                 <DeleteIcon fontSize="small" />

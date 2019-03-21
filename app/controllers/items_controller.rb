@@ -36,9 +36,10 @@ class ItemsController < ApplicationController
 
   def destroy
     i = Item.find(params[:id])
+    @category_id = i.category_id
     i.destroy
-
-    @item = Item.where(user_id: session[:id])
+   
+    @item = Item.where(user_id: session[:user_id], category_id: @category_id)
     render :json => {item: @item}
   end
 end

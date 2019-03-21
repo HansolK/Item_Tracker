@@ -22,10 +22,9 @@ function App() {
         <Bar buttonClick={setMainButton}/>
         <div style={{height: 64}} />
         <Switch>
-          <Route exact path="/" render={() => <Home />} />
           <Route path="/categories/:id?" component={CategoryPage} />
           <Route path="/items/:id" component={ShowDetail}/>
-          <Redirect to="/" />
+          <Redirect to="/categories" />
         </Switch>
       </>
     );

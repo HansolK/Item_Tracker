@@ -37,6 +37,8 @@ function EditItemModal({onClose, currentInfo, editItemModal, classes}) {
   const [rate, setRate] = useState(currentInfo.rate);
   const id = currentInfo.id
   const category_id = currentInfo.category_id
+
+  
   useEffect(function() {
     setName(currentInfo.name)
     setPrice(currentInfo.price)

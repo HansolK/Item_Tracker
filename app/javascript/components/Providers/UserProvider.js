@@ -34,7 +34,6 @@ function UserProvider(props) {
     })
       .then(res => res.json())
       .then(data => {
-        console.log("logging in");
         setLoginStatus({ ...loginStatus, loading: false });
         if (data.error) {
           setLoginStatus({ ...loginStatus, error: data.error });

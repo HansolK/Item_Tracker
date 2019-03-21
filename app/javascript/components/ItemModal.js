@@ -4,15 +4,15 @@ import PropTypes from "prop-types";
 import TextField from "@material-ui/core/TextField";
 import { withStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
-import Typography from '@material-ui/core/Typography';
+import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import Slider from '@material-ui/lab/Slider';
+import Slider from "@material-ui/lab/Slider";
 import { InputLabel } from "@material-ui/core";
 
 function getModalStyle() {
   return {
-    top: '50%',
-    left: '50%',
+    top: "50%",
+    left: "50%",
     transform: `translate(-50%, -50%)`
   };
 }
@@ -28,13 +28,13 @@ const styles = theme => ({
   }
 });
 
-
 function ItemModal(props) {
   const categoryProvider = useContext(CategoryContext);
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [rate, setRate] = useState(0);
+  const [formSubmitted, setFormSubmitted] = useState(false);
   const category_id = props.category;
   const { classes } = props;
 
@@ -50,20 +50,25 @@ function ItemModal(props) {
           <form
             onSubmit={e => {
               e.preventDefault();
-              props.onClose();
-              categoryProvider.itemPost(
-                name,
-                price,
-                description,
-                rate,
-                category_id
-              );  
+              setFormSubmitted(true);
+              
+              if (name !== "" && price !== "" && description !== "") {
+                props.onClose();
+                categoryProvider.itemPost(
+                  name,
+                  price,
+                  description,
+                  rate,
+                  category_id
+                );
+              }
             }}
           >
             <TextField
               id="standard-name"
               label="Name"
               value={name}
+              error={formSubmitted && name === ""}
               onChange={e => setName(e.target.value)}
               fullWidth={true}
               margin="normal"
@@ -72,6 +77,7 @@ function ItemModal(props) {
               id="standard-name"
               label="Price"
               value={price}
+              error={formSubmitted && price === ""}
               onChange={e => setPrice(e.target.value)}
               fullWidth={true}
               margin="normal"
@@ -80,23 +86,21 @@ function ItemModal(props) {
               id="standard-name"
               label="Description"
               value={description}
+              error={formSubmitted && description === ""}
               onChange={e => setDescription(e.target.value)}
               fullWidth={true}
               margin="normal"
             />
-            <InputLabel 
-            id="slider-image"
-            >
-            Rate</InputLabel>
+            <InputLabel id="slider-image">Rate</InputLabel>
             <Slider
               margin="normal"
-              style={{padding: '22px 0px'}}
+              style={{ padding: "22px 0px" }}
               value={rate}
               min={0}
               max={10}
               step={1}
               onChange={(_, newValue) => {
-                setRate(newValue)
+                setRate(newValue);
               }}
             />
             <Button type="submit" className={classes.button}>

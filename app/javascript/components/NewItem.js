@@ -2,6 +2,7 @@ import React, {useState, useContext} from 'react'
 import {CategoryContext} from './Providers/CategoryProvider'
 import Button from '@material-ui/core/Button'
 
+
 function NewItem(props) {
   const categoryProvider = useContext(CategoryContext)
   const [name, setName] = useState("")
@@ -10,6 +11,7 @@ function NewItem(props) {
   const [rate, setRate] = useState(0)
   const category_id = props.category
   
+ 
   return(
     <div>
       <form onSubmit={e => {
@@ -31,7 +33,9 @@ function NewItem(props) {
             name="rate" type="range" min="1" max="10" value={rate}/>
         </div>
           <div className="submit_form_button">
-            <Button variant="outlined" size="medium" color="primary" type="submit">
+            <Button 
+            onClick={checkAllSections}
+            variant="outlined" size="medium" color="primary" type="submit">
               Add This Item
             </Button>
           </div>

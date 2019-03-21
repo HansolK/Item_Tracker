@@ -9,7 +9,6 @@ function LoginPage() {
   const userProvider = useContext(UserContext)
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  console.log("user", userProvider.isLoggedIn)
   if (userProvider.isLoggedIn) {
     return <Redirect to="/categories" />
   }

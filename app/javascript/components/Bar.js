@@ -23,7 +23,7 @@ function Bar(props) {
           {isLoggedIn && (
             <div>
               <Button color="inherit" component={Link} to="/categories">
-              Categories
+              Top 5
               </Button>
               <Button
                 onClick={() => {

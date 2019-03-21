@@ -31,11 +31,11 @@ const styles = theme => ({
 });
 
 function SimpleModal(props) {
-  const userProvider = useContext(UserContext);
+  const [formSubmitted, setFormSubmitted] = useState(false)
   const [categoryName, setCategoryName] = useState("");
   const categoryProvider = useContext(CategoryContext);
   const { classes } = props;
-
+  
   return (
     <div>
       <Modal
@@ -50,16 +50,26 @@ function SimpleModal(props) {
             props.onClose()
             categoryProvider.createCategory(categoryName)
           }}>
+          
             <TextField
               id="standard-name"
               label="Name"
+              error = {formSubmitted && categoryName === ""}
               value={categoryName}
               className={classes.textField}
-              onChange={e => setCategoryName(e.target.value)}
+              onChange={e => {
+                setCategoryName(e.target.value)
+              }}
               fullWidth={true}
               margin="normal"
             />
             <Button
+              onClick={e => {
+                if(categoryName !== "") {
+                  return e.submit()}
+                e.preventDefault()
+                setFormSubmitted(true)
+              }}
               type="submit"
               className={classes.button}
             >

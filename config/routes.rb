@@ -1,14 +1,13 @@
 Rails.application.routes.draw do
   post '/items', to: "items#create"
-  post '/api/items/:id', to: "items#edit"
-  get '/api/items/:id', to: "items#destroy"
+  put '/api/items/:id', to: "items#edit"
+  delete '/api/items/:id', to: "items#destroy"
   get '/api/items', to: "items#index"
 
   post '/api/categories', to: "categories#create"
   get '/api/categories', to: "categories#index"
-  get '/api/categories/:id', to: "categories#show"
-  get '/api/categories/:id/delete', to: "categories#destroy"
-
+  get '/api/categories/:id/items', to: "categories#show"
+  delete '/api/categories/:id/delete', to: "categories#destroy"
 
   
   get '/sessions', to: "sessions#show"

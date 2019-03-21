@@ -18,9 +18,10 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
-    c = Item.find(params[:id])
+    c = Category.find(params[:id])
     c.destroy
-    categories = Category.where(user_id: session[:id])
+    
+    categories = Category.where(user_id: session[:user_id])
     render :json => {categories: categories}
   end
 end
