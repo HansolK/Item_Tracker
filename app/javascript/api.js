@@ -1,0 +1,29 @@
+
+function get(url) {
+  return (
+  fetch(url)
+  .then(res => res.json())
+  )
+}
+
+function post(url, data) {
+  return fetch(url, {
+    method: "post",
+    body: JSON.stringify(data),
+    headers: {
+      "X-CSRF-Token": document
+        .querySelector('meta[name="csrf-token"]')
+        .getAttribute("content"),
+      "Content-type": "application/json"
+    }
+  })
+  .then(res => res.json())
+}
+
+
+
+export default {
+  get,
+  post
+}
+

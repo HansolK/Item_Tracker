@@ -18,12 +18,18 @@
 
 .item_wrapper {
   display: grid;
-  flex: 1;
   grid-template-columns: 1fr 1fr 1fr 1fr 2fr;
-  overflow-wrap: break-word;
+
   border: 1px dashed black;
   text-align: center;
   margin: 5px;
   padding: 10px;
 }
 
+.item_wrapper p {
+  overflow-wrap: break-word;
+}
+
+.maximise {
+  max-width: 100px;
+}

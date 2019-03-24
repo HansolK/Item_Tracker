@@ -1,11 +1,11 @@
 import React, { createContext, useEffect, useState, useContext } from "react";
+import api from '../../api'
 const UserContext = createContext({});
 
 function UserProvider(props) {
   const [session, setSession] = useState({ loading: true });
   useEffect(function() {
-    fetch("/sessions")
-      .then(res => res.json())
+    api.get("/sessions")
       .then(data => {
         if (data.error) {
           setSession({ ...session, loading: false, user: null });
@@ -19,20 +19,10 @@ function UserProvider(props) {
     error: null,
     loading: false
   });
+  
   const login = (email, password) => {
     setLoginStatus({ loading: true });
-
-    fetch("/sessions/create", {
-      method: "post",
-      body: JSON.stringify({ email, password }),
-      headers: {
-        "X-CSRF-Token": document
-          .querySelector('meta[name="csrf-token"]')
-          .getAttribute("content"),
-        "Content-type": "application/json"
-      }
-    })
-      .then(res => res.json())
+    api.post("/sessions/create", {email, password})
       .then(data => {
         setLoginStatus({ ...loginStatus, loading: false });
         if (data.error) {
@@ -45,17 +35,7 @@ function UserProvider(props) {
   };
 
   const signIn = (name, email, password) => {
-    fetch("/api/users/create", {
-      method: "post",
-      body: JSON.stringify({ name, email, password }),
-      headers: {
-        "X-CSRF-Token": document
-          .querySelector('meta[name="csrf-token"]')
-          .getAttribute("content"),
-        "Content-type": "application/json"
-      }
-    })
-      .then(res => res.json())
+    api.post("/api/users/create", { name, email, password })
       .then(data => {
         if (data.error) {
           // setSession({...session, user: null})
@@ -67,8 +47,7 @@ function UserProvider(props) {
 
 
   const signOut = () => {
-    fetch("/sessions/destroy")
-    .then(res => res.json())
+    api.get("/sessions/destroy")
     .then(data => setSession({ ...session, user: null})) 
   }
 

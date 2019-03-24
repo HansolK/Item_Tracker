@@ -1,4 +1,5 @@
 import React, { useState, createContext } from "react";
+import api from '../../api'
 const CategoryContext = createContext({});
 
 function CategoryProvider(props) {
@@ -6,25 +7,14 @@ function CategoryProvider(props) {
   const [categories, setCategories] = useState([]);
 
   const getCategories = () => {
-    fetch("/api/categories")
-      .then(res => res.json())
+    api.get("/api/categories")
       .then(data => {
         setCategories(data.categories);
       });
   };
 
   const createCategory = name => {
-    fetch(`/api/categories`, {
-      method: "post",
-      body: JSON.stringify({ name }),
-      headers: {
-        "X-CSRF-Token": document
-          .querySelector('meta[name="csrf-token"]')
-          .getAttribute("content"),
-        "Content-type": "application/json"
-      }
-    })
-      .then(res => res.json())
+    api.post(`/api/categories`, { name })
       .then(data => {
         setCategories([...categories, data]);
       });
