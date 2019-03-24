@@ -21,7 +21,7 @@ function CategoryProvider(props) {
   };
 
   const deleteCategory = id => {
-    fetch(`/api/categories/${id}/delete`, {
+    return fetch(`/api/categories/${id}/delete`, {
       method: "delete",
       body: JSON.stringify({ id }),
       headers: {

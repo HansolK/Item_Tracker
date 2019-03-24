@@ -10,23 +10,22 @@ import "./ItemPage.css";
 function ItemPage(props) {
   const [currentInfo, setCurrentInfo] = useState("");
   const categoryProvider = useContext(CategoryContext);
+  const itemProvider = useContext(ItemContext)
   const [itemModal, setItemModal] = useState(false);
   const [editItemModal, setEditItemModal] = useState(false);
-  const [loading, setLoading] = useState(true);
+  // useEffect(
+  //   function() {
+  //     fetch(`/api/categories/${props.categoryId}/items`)
+  //       .then(res => res.json())
+  //       .then(data => {
+  //         categoryProvider.setItems(data.items);
+          
+  //       });
+  //   },
+  //   [props.categoryId]
+  // );
 
-  useEffect(
-    function() {
-      fetch(`/api/categories/${props.selectedCategory}/items`)
-        .then(res => res.json())
-        .then(data => {
-          categoryProvider.setItems(data.items);
-          setLoading(false);
-        });
-    },
-    [props.selectedCategory]
-  );
-
-  if (loading) {
+  if (props.loading) {
     return (
       <div className="loading">
         <div className="loader" />
@@ -35,8 +34,8 @@ function ItemPage(props) {
   }
 
   if (
-    loading === false &&
-    categoryProvider.getCategory(props.selectedCategory) === undefined
+    props.loading === false &&
+    categoryProvider.getCategory(props.categoryId) === undefined
   ) {
     return <Redirect to="/categories" />;
   }
@@ -46,7 +45,7 @@ function ItemPage(props) {
       <div className="category_header">
         <h1>
           Explore categories{" "}
-          {categoryProvider.getCategory(props.selectedCategory).name}
+          {categoryProvider.getCategory(props.categoryId).name}
         </h1>
         <Button
           onClick={() => {
@@ -110,7 +109,7 @@ function ItemPage(props) {
           onClose={() => setItemModal(false)}
           items={categoryProvider.items}
           setItems={categoryProvider.setItems}
-          category={props.selectedCategory}
+          category={props.categoryId}
         />
       )}
     </div>

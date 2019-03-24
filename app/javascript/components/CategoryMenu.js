@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
+import {ItemContext} from './Providers/ItemProvider'
 import AddCategoryModal from "./AddCategoryModal";
 import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
@@ -24,6 +25,7 @@ const styles = theme => ({
 function CategoryMenu(props) {
   const [modalOpen, setModalOpen] = useState(false);
   const categoryProvider = useContext(CategoryContext)
+  const itemProvider = useContext(ItemContext)
   if (props.categories === null) {
     return (
       <Drawer
@@ -77,7 +79,11 @@ function CategoryMenu(props) {
                 aria-label="Delete"
                 onClick={e => {
                   e.preventDefault()
-                  categoryProvider.deleteCategory(category.id)
+                  categoryProvider
+                    .deleteCategory(category.id)
+                    .then(function() {
+                      itemProvider.topFive.fetch()
+                    })
                 }}
                 className={`${props.classes.margin} delete_category`}
               >
