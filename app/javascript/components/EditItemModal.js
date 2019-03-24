@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from "@material-ui/core/Button";
 import Slider from '@material-ui/lab/Slider';
 import { InputLabel } from "@material-ui/core";
+import { ItemContext } from "./Providers/ItemProvider";
 
 function getModalStyle() {
   return {
@@ -29,29 +30,27 @@ const styles = theme => ({
 });
 
 
-function EditItemModal({onClose, currentInfo, editItemModal, classes}) {
+function EditItemModal({onClose, item: originalItem, classes}) {
   const categoryProvider = useContext(CategoryContext);
-  const [name, setName] = useState(currentInfo.name);
-  const [price, setPrice] = useState(currentInfo.price);
-  const [description, setDescription] = useState(currentInfo.description);
-  const [rate, setRate] = useState(currentInfo.rate);
-  const id = currentInfo.id
-  const category_id = currentInfo.category_id
+  const itemProvider = useContext(ItemContext)
+  const [item, setItem] = useState(originalItem)
+  console.log(item)
+  const id = item.id
+  const category_id = item.category_id
 
-  
-  useEffect(function() {
-    setName(currentInfo.name)
-    setPrice(currentInfo.price)
-    setDescription(currentInfo.description)
-    setRate(currentInfo.rate)
-  }, [currentInfo])
+  const updateItem = (newStuff) => {
+    setItem({
+      ...item,
+      ...newStuff
+    })
+  }
 
   return (
     <div>
       <Modal
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
-        open={editItemModal}
+        open
         onClose={() => onClose()}
       >
         <div style={getModalStyle()} className={classes.paper}>
@@ -59,30 +58,30 @@ function EditItemModal({onClose, currentInfo, editItemModal, classes}) {
             onSubmit={e => {
               e.preventDefault();
               onClose();
-              categoryProvider.editItem(id, name, price, description, rate, category_id)
+              itemProvider.editItem(item)
             }}
           >
             <TextField
               id="standard-name"
               label="Name"
-              value={name}
-              onChange={e => setName(e.target.value)}
+              value={item.name}
+              onChange={e => updateItem({name: e.target.value})}
               fullWidth={true}
               margin="normal"
             />
             <TextField
               id="standard-name"
               label="Price"
-              value={price}
-              onChange={e => setPrice(e.target.value)}
+              value={item.price}
+              onChange={e => updateItem({price:e.target.value})}
               fullWidth={true}
               margin="normal"
             />
             <TextField
               id="standard-name"
               label="Description"
-              value={description}
-              onChange={e => setDescription(e.target.value)}
+              value={item.description}
+              onChange={e => updateItem({description: e.target.value})}
               fullWidth={true}
               margin="normal"
             />
@@ -93,12 +92,12 @@ function EditItemModal({onClose, currentInfo, editItemModal, classes}) {
             <Slider
               margin="normal"
               style={{padding: '22px 0px'}}
-              value={rate}
+              value={item.rate}
               min={0}
               max={10}
               step={1}
               onChange={(_, newValue) => {
-                setRate(newValue)
+                updateItem({rate: newValue})
               }}
             />
             <Button type="submit" className={classes.button}>

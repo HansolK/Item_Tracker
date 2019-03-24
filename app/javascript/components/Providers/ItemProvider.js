@@ -6,6 +6,7 @@ const ItemContext = createContext({});
 function ItemProvider(props) {
   const [topFive, setTopFive] = useState([])
   const [topFiveStatus, setTopFiveStatus] = useState({loading: false, error: false})
+  
   const getTopFive = () => {
     setTopFiveStatus({loading: true})
     api.get("/api/items")
@@ -31,6 +32,36 @@ function ItemProvider(props) {
       });
   }
 
+
+  const itemPost = (name, price, description, rate, category_id) => {
+    api.post('/items', { name, price, description, rate, category_id })
+      .then(data => {
+        console.log("data", data.item)
+        setCategoryItems([...categoryItems, data.item]);
+      });
+  };
+
+
+  const editItem = (item) => {
+    api.put(`/api/items/${item.id}`, item)
+      .then(data => {
+        setCategoryItems(
+          categoryItems.map(item => {
+            if (item.id === data.item.id) {
+              return data.item;
+            }
+            return item;
+          })
+        );
+      });
+  };
+
+
+  const deleteItem = id => {
+    api.delete(`/api/items/${id}`, id)
+      .then(data => setCategoryItems(data.item));
+  };
+
   return (
     <ItemContext.Provider
       value={{
@@ -43,7 +74,10 @@ function ItemProvider(props) {
           items: categoryItems,
           fetch: getCategoryItems,
           status: categoryItemsStatus
-        }
+        },
+        itemPost,
+        editItem,
+        deleteItem
       }}
     >
       {props.children}

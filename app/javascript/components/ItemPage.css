@@ -33,3 +33,7 @@
 .maximise {
   max-width: 100px;
 }
+
+.onHover:hover {
+  cursor: pointer;
+}

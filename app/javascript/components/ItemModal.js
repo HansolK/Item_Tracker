@@ -8,6 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Slider from "@material-ui/lab/Slider";
 import { InputLabel } from "@material-ui/core";
+import { ItemContext } from "./Providers/ItemProvider";
 
 function getModalStyle() {
   return {
@@ -30,6 +31,7 @@ const styles = theme => ({
 
 function ItemModal(props) {
   const categoryProvider = useContext(CategoryContext);
+  const itemProvider = useContext(ItemContext)
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
@@ -54,7 +56,7 @@ function ItemModal(props) {
               
               if (name !== "" && price !== "" && description !== "") {
                 props.onClose();
-                categoryProvider.itemPost(
+                itemProvider.itemPost(
                   name,
                   price,
                   description,
