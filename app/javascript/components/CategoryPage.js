@@ -20,8 +20,17 @@ function CategoryPage(props) {
   const categoryProvider = useContext(CategoryContext);
   const [itemModal, setItemModal] = useState(false);
   const categoryId = props.match.params.id;
-
+  const [sortBy, setSortBy] = useState("descending")
   useEffect(categoryProvider.getCategories, []);
+  
+  function topFiveHeading(sortedby) {
+    if(sortedby === "descending") {
+      return "Your most loved items - Top Five"
+    } 
+    return "Your worst items - Top Five"
+  }
+
+
 
   useEffect(
     function() {
@@ -52,14 +61,14 @@ function CategoryPage(props) {
   }
 
   return (
-    <div className="content">
+    <div className="content" >
       <CategoryMenu categories={categoryProvider.categories} />
       <div style={{ flex: 1 }}>
         <div className="category_header">
           <h1>
             {categoryId
               ? `Explore ${categoryProvider.getCategory(categoryId).name}`
-              : "Top five items"}
+              : topFiveHeading(sortBy)}
           </h1>
           {categoryId && (
             <Button
@@ -91,6 +100,8 @@ function CategoryPage(props) {
               ? itemProvider.categoryItems.items
               : itemProvider.topFive.items
           }
+          sortBy={sortBy}
+          setSortBy={setSortBy}
           showControls={Boolean(categoryId)}
         />
       </div>

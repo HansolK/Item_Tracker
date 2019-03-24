@@ -23,12 +23,12 @@ const styles = theme => ({
 
 function ItemsTable(props) {
   const itemProvider = useContext(ItemContext);
-  const [sortBy, setSortBy] = useState("descending")
+  
   const [selectedItem, setSelectedItem] = useState(null);
   const { classes, items } = props;
 
   const sortOrder = (items) => {
-    if(sortBy === "descending") {
+    if(props.sortBy === "descending") {
       return items.sort((a, b) => (a.rate > b.rate ? -1 : 1))
     } else {
       return items.sort((a, b) => (a.rate > b.rate ? 1 : -1))
@@ -50,12 +50,12 @@ function ItemsTable(props) {
             <TableCell 
             className="onHover"
             onClick={() => {
-              if(sortBy === "descending") {
-                setSortBy("ascending")
+              if(props.sortBy === "descending") {
+                props.setSortBy("ascending")
               } else {
-                setSortBy("descending")
+                props.setSortBy("descending")
               }
-            }}>Rate{sortBy === "descending" ? <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg> : <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6 1.41 1.41z"/></svg>}</TableCell>
+            }}>Rate{props.sortBy === "descending" ? <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg> : <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6 1.41 1.41z"/></svg>}</TableCell>
             <TableCell>Price</TableCell>
             <TableCell>Description</TableCell>
             {props.showControls && (
