@@ -30,12 +30,10 @@ function CategoryPage(props) {
     return "Your worst items - Top Five"
   }
 
-
-
   useEffect(
     function() {
       if (categoryId) {
-        itemProvider.categoryItems.fetch(categoryId);
+        itemProvider.categoryItems.fetch(categoryId)
       } else {
         itemProvider.topFive.fetch();
       }
@@ -66,7 +64,7 @@ function CategoryPage(props) {
       <div style={{ flex: 1 }}>
         <div className="category_header">
           <h1>
-            {categoryId
+            {categoryId && categoryProvider.getCategory(categoryId)
               ? `Explore ${categoryProvider.getCategory(categoryId).name}`
               : topFiveHeading(sortBy)}
           </h1>

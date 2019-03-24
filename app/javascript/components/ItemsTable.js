@@ -23,7 +23,6 @@ const styles = theme => ({
 
 function ItemsTable(props) {
   const itemProvider = useContext(ItemContext);
-  
   const [selectedItem, setSelectedItem] = useState(null);
   const { classes, items } = props;
 
@@ -36,9 +35,8 @@ function ItemsTable(props) {
   }
 
   if (items.length === 0) {
-    return <div>There are no items</div>
+    return <div>There are no items!! Be calm just go to your cateogry and Add one!</div>
   }
- 
   return (
     <>
     <Paper className={classes.root}>

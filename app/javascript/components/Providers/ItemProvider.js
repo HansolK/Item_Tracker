@@ -36,7 +36,6 @@ function ItemProvider(props) {
   const itemPost = (name, price, description, rate, category_id) => {
     api.post('/items', { name, price, description, rate, category_id })
       .then(data => {
-        console.log("data", data.item)
         setCategoryItems([...categoryItems, data.item]);
       });
   };

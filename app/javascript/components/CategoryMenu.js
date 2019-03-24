@@ -26,6 +26,7 @@ function CategoryMenu(props) {
   const [modalOpen, setModalOpen] = useState(false);
   const categoryProvider = useContext(CategoryContext)
   const itemProvider = useContext(ItemContext)
+  
   if (props.categories === null) {
     return (
       <Drawer
